@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <style>
+            body{
+                background: linear-gradient(to left, purple, blue, purple);
+                color: white;
+            }
+            input, #sub{
+                width: 180px;
+            }
+            button{
+                margin-top: 30px;
+                width: 370px;
+                margin-bottom: 10px;
+                background-color: yellow;
+                color: teal;
+            }
+            input{
+                background-color: yellow;
+                color: teal;
+            }
+            #sl{
+                visibility: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <center>
+            <h1>Add Guests</h1>
+            <input id="newI" placeholder="Enter the name of your guests">
+            <button onclick="submitG()" id="sub">Submit</button><br>
+            <label id="guest-list"></label><br>
+            <button onclick="showVertical()">Show Vertical Guest List</button><br>
+            <label id="v-guest-list"></label><br>
+            <button onclick="sortG()">Sort Vertical Guest List</button><br><br>
+            <input id="searchI" placeholder="Search for a name" oninput="searchG()">
+            <label id="sl">Name found <span id="num"></span> time(s)</label>
+        </center>
+    </body>
+    <script>
+        var guests = [];
+        var submitG = function(){
+            guests.push(document.getElementById("newI").value);
+            document.getElementById("guest-list").innerHTML += document.getElementById("newI").value +", ";
+        };
+        var showVertical = function(){
+            document.getElementById("v-guest-list").innerHTML = "";
+            for(var i=0; i<guests.length; i++){
+                document.getElementById("v-guest-list").innerHTML += guests[i]+"<br>";
+            }
+        }
+        var sortG =function(){
+            guests.sort();
+            document.getElementById("v-guest-list").innerHTML = "";
+            for(var i=0; i<guests.length; i++){
+                document.getElementById("v-guest-list").innerHTML += guests[i]+"<br>";
+            }
+        }
+        var searchG = function(){
+            document.getElementById("sl").style.visibility = "visible";
+            var numfound = 0;
+            for(var i=0; i<guests.length; i++){
+                if(guests[i]===document.getElementById("searchI").value){
+                    numfound++;
+                }
+            }
+            document.getElementById("num").innerHTML = numfound; 
+        }
+    </script>
+</html>
